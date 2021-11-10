@@ -1,24 +1,12 @@
 // Imports
 import asyncHandler from 'express-async-handler'
+import puppeteer from 'puppeteer'
 
-// Import models
-import Item from '../models/model.js'
+export const getShifts = asyncHandler(async (req, res) => {
+  const shifts = []
 
-export const getItem = asyncHandler(async (req, res) => {
-  const items = await Item.find({})
-
-  if (items) {
-    res.json(items)
-  } else {
-    throw new Error('No Items')
-  }
-})
-
-export const newItem = asyncHandler(async (req, res) => {
-  const item = new Item({
-    name: 'Caleb',
-  })
-
-  await item.save()
-  res.json(item)
+  const browser = await puppeteer.launch({ devtools: true }) //Chromium Bug Testing >>> { devtools: true }
+  const page = await browser.newPage()
+  const url = `https://shiftagent.org/sa/#/login`
+  await page.goto(url)
 })

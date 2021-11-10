@@ -1,12 +1,13 @@
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
 
-const modelSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-})
+// const modelSchema = mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true,
+//   },
+// })
 
-const Item = mongoose.model('Item', modelSchema)
+// const Item = mongoose.model('Item', modelSchema)
 
-export default Item
+// export default Item
+// //
