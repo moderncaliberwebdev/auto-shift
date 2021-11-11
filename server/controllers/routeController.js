@@ -12,7 +12,7 @@ export const postShifts = asyncHandler(async (req, res) => {
 
   //open shiftaget
   const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: ['--no-sandbox'],
   }) //{ headless: false }
   const page = await browser.newPage()
   await page.goto('https://shiftagent.org/sa/#/login')
