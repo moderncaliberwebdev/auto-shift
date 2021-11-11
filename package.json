@@ -10,6 +10,7 @@
     "express-async-handler": "^1.1.4",
     "googleapis": "^39.2.0",
     "mongoose": "^5.11.11",
+    "path": "^0.12.7",
     "puppeteer": "^11.0.0"
   },
   "devDependencies": {

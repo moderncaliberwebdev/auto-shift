@@ -10,16 +10,6 @@ html {
   // Defines what 1rem is
   /* root font size is 16px so 62.5% is 10px */
   font-size: 62.5%;
-
-  @include respond(big-desktop) {
-    font-size: 75%; // 12px
-  }
-  @include respond(tab-land) {
-    font-size: 56.25%; //9px
-  }
-  @include respond(tab-port) {
-    font-size: 50%; //8px
-  }
 }
 
 body {
