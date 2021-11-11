@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import axios from 'axios'
 import 'regenerator-runtime/runtime.js'
 
 import '../sass/pages/_home.scss'
 
-import { actions } from '../store'
-
 function App() {
   const [month, setMonth] = useState('')
   const [day, setDay] = useState('')
   const [year, setYear] = useState('')
-  // const [reqData, setReqData] = useState({})
   const [waiting, setWaiting] = useState(false)
 
   const handleSubmit = async (e) => {
