@@ -69,7 +69,8 @@ export const postShifts = asyncHandler(async (req, res) => {
   const auth = new google.auth.JWT(
     process.env.CLIENT_EMAIL,
     null,
-    JSON.parse(process.env.CLIENT_PRIVATE_KEY),
+    // JSON.parse(process.env.CLIENT_PRIVATE_KEY),
+    process.env.CLIENT_PRIVATE_KEY,
     SCOPES
   )
 
@@ -81,7 +82,9 @@ export const postShifts = asyncHandler(async (req, res) => {
     let currentYear = new Date().getFullYear()
     //split month and date
     const splitMonth = shiftDate.split(' ')[0]
-    const splitDay = shiftDate.split(' ')[1]
+    const splitDay = shiftDate.split(' ')[1].startsWith('0')
+      ? shiftDate.split(' ')[1].slice(1)
+      : shiftDate.split(' ')[1]
     const shiftMonth =
       new Date(Date.parse(splitMonth + ` 1, ${currentYear}`)).getMonth() + 1
     //if its a new year, increase the year
@@ -98,7 +101,6 @@ export const postShifts = asyncHandler(async (req, res) => {
       dayOfYear(
         new Date(Date.parse(`${splitMonth}/${splitDay}/${currentYear}`))
       ) * currentYear
-
     if (dayOfShift >= startDay) {
       //convert start and end time to military time
       const startHour =
@@ -115,7 +117,7 @@ export const postShifts = asyncHandler(async (req, res) => {
 
       const shiftStart = new Date(
         currentYear,
-        shiftMonth,
+        shiftMonth - 1,
         splitDay,
         startHour,
         startMinute
@@ -123,7 +125,7 @@ export const postShifts = asyncHandler(async (req, res) => {
 
       const shiftEnd = new Date(
         currentYear,
-        shiftMonth,
+        shiftMonth - 1,
         splitDay,
         endHour,
         endMinute
@@ -141,7 +143,7 @@ export const postShifts = asyncHandler(async (req, res) => {
 
   const getCalendarDate = (dateOfShift) => {
     let year = dateOfShift.getFullYear()
-    let month = dateOfShift.getMonth()
+    let month = dateOfShift.getMonth() + 1
     if (month < 10) {
       month = `0${month}`
     }
@@ -157,7 +159,6 @@ export const postShifts = asyncHandler(async (req, res) => {
     if (minute < 10) {
       minute = `0${minute}`
     }
-
     const newDateTime = `${year}-${month}-${day}T${hour}:${minute}:00.000${TIMEOFFSET}`
 
     const event = new Date(Date.parse(newDateTime))
