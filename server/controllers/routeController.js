@@ -69,8 +69,8 @@ export const postShifts = asyncHandler(async (req, res) => {
   const auth = new google.auth.JWT(
     process.env.CLIENT_EMAIL,
     null,
-    // JSON.parse(process.env.CLIENT_PRIVATE_KEY),
-    process.env.CLIENT_PRIVATE_KEY,
+    JSON.parse(process.env.CLIENT_PRIVATE_KEY), //use this one for prod
+    // process.env.CLIENT_PRIVATE_KEY,
     SCOPES
   )
 
